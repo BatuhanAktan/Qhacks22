@@ -6,11 +6,11 @@ seven=['animals', 'because', 'chapter', 'another', 'believe', 'English', 'flower
 const caption_div = document.getElementById('caption-div');
 const sen_box = document.getElementById('sentance-box');
 const stop_button = document.getElementById("stop-button");
-
 const buttonEl = document.getElementById('reading-button');
 const messageEl = document.getElementById('feedback');
 
 var chosen_words = [];
+
 // set initial state of application variables
 let isRecording = false;
 let socket;
@@ -23,6 +23,7 @@ const run = async () => {
     buttonEl.innerText="Begin Reading";
     caption_div.style.width = '100%';
     sen_box.innerHTML="(Press Start And Begin Reading)";
+
     if (socket) {
       socket.send(JSON.stringify({terminate_session: true}));
       socket.close();
@@ -33,9 +34,11 @@ const run = async () => {
       recorder.stopRecording();
       recorder = null;
     }
-  } else {
+
+    } else {
     sen_box.innerHTML = "";
     buttonEl.innerText="Waiting for Assembly AI";
+
     const response = await fetch('http://localhost:8000'); // get temp session token from server.js (backend)
     const data = await response.json();
 
@@ -50,17 +53,20 @@ const run = async () => {
 
     // handle incoming messages to display transcription to the DOM
     const texts = {};
+
     socket.onmessage = (message) => {
       let msg = '';
       const res = JSON.parse(message.data);
       texts[res.audio_start] = res.text;
       const keys = Object.keys(texts);
       keys.sort((a, b) => a - b);
+
       for (const key of keys) {
         if (texts[key]) {
           msg += ` ${texts[key]}`;
         }
       }
+      
       if(msg){
         msg = msg.match(/[^_\W]+/g).join(' ');
         messageEl.innerText = msg;
