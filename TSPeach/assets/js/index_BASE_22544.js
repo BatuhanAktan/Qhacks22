@@ -21,7 +21,8 @@ const run = async () => {
 
   if (isRecording) { 
     buttonEl.innerText="Begin Reading";
-    
+    caption_div.style.width = '100%';
+    sen_box.innerHTML="(Press Start And Begin Reading)";
     if (socket) {
       socket.send(JSON.stringify({terminate_session: true}));
       socket.close();
@@ -34,8 +35,6 @@ const run = async () => {
     }
   } else {
     sen_box.innerHTML = "";
-    caption_div.style.width = 'fit-content';
-    messageEl.innerText="Feedback Will Appear Here";
     buttonEl.innerText="Waiting for Assembly AI";
     const response = await fetch('http://localhost:8000'); // get temp session token from server.js (backend)
     const data = await response.json();
@@ -57,30 +56,21 @@ const run = async () => {
       texts[res.audio_start] = res.text;
       const keys = Object.keys(texts);
       keys.sort((a, b) => a - b);
-      console.log(keys);
       for (const key of keys) {
         if (texts[key]) {
           msg += ` ${texts[key]}`;
         }
       }
-
       if(msg){
-        let final="";
         msg = msg.match(/[^_\W]+/g).join(' ');
-        let split_msg = msg.split(" ");
-        for(let i=0; i<split_msg.length;i++){
-          if(chosen_words.includes(split_msg[i].toUpperCase())){
-            final += split_msg[i] + " ";
-          }else{
-            final += '<i>'+split_msg[i] + '</i> ';
-          }
-        }
-        messageEl.innerHTML = final;
+        messageEl.innerText = msg;
       }
-
-
-
     };
+
+    socket.onerror = (event) => {
+      console.error(event);
+      socket.close();
+    }
     
     socket.onclose = event => {
       console.log("SOCKET CLOSED");
@@ -98,12 +88,9 @@ const run = async () => {
 
         var ran = Math.floor(Math.random() * lists[list_num].length);
 
-        let word = lists[list_num][ran];
-        chosen_words.push(word.toUpperCase());
-
-        sen_box.innerHTML += (word.toUpperCase() + " ");
+        sen_box.innerHTML += (lists[list_num][ran] + " ");
       }
-      caption_div.style.width = '100%';
+
       buttonEl.innerText="End Recording";
       // once socket is open, begin recording
       messageEl.style.display = '';
