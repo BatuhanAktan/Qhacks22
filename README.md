@@ -8,7 +8,7 @@ We tried to figure out what kept us connected during the pandemic other then the
 
 ### Prerequisites
 
-All the libraries used are in requirements.txt, and everything is linked in the index.html file
+All the libraries used are in requirements.txt, and everything is linked in the index.html file. Installing according to the following section will automatically install dependencies.
 
 Example
 ```
@@ -18,11 +18,25 @@ Example
 
 ### Installing
 
-The github repo can be downloaded, and the project can be locally hosted using http-server using the command in the directory of the file.
+Being based in Node.JS, first clone this repository, then enter its folder directory.
+
+Then run (making sure that nodejs is installed)
+```
+npm install
+```
+After all dependencies are installed, start the server and client components of the application with the following commands.
+```
+
+npm run server
 
 ```
-http-server ./
 ```
+
+npm run client
+
+```
+You should now be able to use the web-app through any browser (Including Mobile) at localhost:3000
+
 
 ## Feedback
 
