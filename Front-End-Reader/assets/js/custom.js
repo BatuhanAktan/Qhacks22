@@ -2,6 +2,8 @@ four=['also', 'away', 'baby', 'back', 'bear', 'book', 'came', 'crow', 'best', 'b
 five=['about', 'after', 'asked', 'birds', 'cabin', 'child', 'could', 'again', 'break', 'dirty', 'going', 'juice', 'light', 'night', 'other', 'there', 'black', 'bring', 'broke', 'first', 'found', 'horse', 'house', 'brown', 'carry', 'chair', 'clean', 'close', 'color', 'crazy', 'drive', 'eight', 'write', 'right', 'think', 'those', 'would', 'stuff', 'every', 'muddy', 'floor', 'flood', 'fruit', 'funny', 'glass', 'green', 'happy', 'three', 'tough', 'doing', 'class', 'where', 'thing', 'hello', 'sides', 'their', 'wants', 'water', 'wheel', 'white', 'later', 'lunch', 'still', 'today', 'seven', 'might', 'hours', 'guess', 'leave', 'money', 'month', 'mouth', 'music', 'never', 'nurse', 'maybe', 'phone', 'these', 'forty', 'comes', 'paper', 'party', 'place', 'quiet', 'radio', 'ready', 'short', 'silly', 'heard', 'until', 'great', 'check', 'sorry', 'stand', 'store', 'table', 'teach', 'thank', 'train', 'study', 'watch', 'whole', 'bucks', 'girls', 'small', 'alone', 'Jacob', 'gonna', 'under', 'which', 'wrong', 'while', 'years', 'cause', 'Sorry', 'Awful', 'Jolly', 'Silly', 'Happy', 'Proud', 'Great', 'Loved', 'Giddy', 'Tense', 'Timid', 'among', 'piece'];
 six=['around', 'before', 'called', 'afraid', 'always', 'animal', 'behind', 'better', 'little', 'myself', 'pretty', 'broken', 'change', 'coffee', 'dinner', 'really', 'enough', 'mother', 'people', 'robins', 'safely', 'school', 'second', 'father', 'finish', 'forget', 'friend', 'should', 'thirty', 'social', 'wanted', 'inside', 'listen', 'Friday', 'Monday', 'thanks', 'things', 'eleven', 'opener', 'please', 'sister', 'either', 'twenty', 'street', 'summer', 'eighty', 'making', 'spring', 'Sunday', 'Jerard', 'Travis', 'Trevor', 'yellow', 'Lonely', 'Bubbly', 'Joyful', 'Strong', 'Uneasy', 'arrive', 'course', 'cousin', 'decide', 'future', 'planet', 'surely', 'theyre', 'aerial', 'asthma'];
 seven=['animals', 'because', 'chapter', 'another', 'believe', 'English', 'flowers', 'friends', 'hundred', 'brother', 'outside', 'reading', 'glasses', 'thought', 'getting', 'started', 'studies', 'alright', 'morning', 'nothing', 'tonight', 'already', 'anybody', 'picture', 'present', 'kidding', 'minutes', 'weekend', 'married', 'through', 'watched', 'working', 'Atlanta', 'playing', 'Tuesday', 'Ashamed', 'Tickled', 'Excited', 'Content', 'Pleased', 'Playful', 'Relaxed', 'Anxious', 'Worried', 'Crushed', 'Unloved', 'America', 'evening', 'finally', 'problem', 'receive', 'several', 'special', 'suppose', 'usually', 'abstain', 'amateur', 'amnesty', 'anxious', 'apology', 'archaic', 'asphalt', 'awkward', 'berserk'];
+const record = document.querySelector('.start');
+const stop = document.querySelector('.end');
 
 (function ($) {
 	
@@ -41,30 +43,30 @@ seven=['animals', 'because', 'chapter', 'another', 'believe', 'English', 'flower
 	}
 
 
-	$(document).ready(function () {
-		$(document).on("scroll", onScroll);
+	// $(document).ready(function () {
+	// 	$(document).on("scroll", onScroll);
 
-	    //smoothscroll
-	    $('.scroll-to-section a[href^="#"]').on('click', function (e) {
-	    	e.preventDefault();
-	    	$(document).off("scroll");
+	//     //smoothscroll
+	//     $('.scroll-to-section a[href^="#"]').on('click', function (e) {
+	//     	e.preventDefault();
+	//     	$(document).off("scroll");
 
-	    	$('a').each(function () {
-	    		$(this).removeClass('active');
-	    	})
-	    	$(this).addClass('active');
+	//     	$('a').each(function () {
+	//     		$(this).removeClass('active');
+	//     	})
+	//     	$(this).addClass('active');
 
-	    	var target = this.hash,
-	    	menu = target;
-	    	var target = $(this.hash);
-	    	$('html, body').stop().animate({
-	    		scrollTop: (target.offset().top) + 1
-	    	}, 500, 'swing', function () {
-	    		window.location.hash = target;
-	    		$(document).on("scroll", onScroll);
-	    	});
-	    });
-	});
+	//     	var target = this.hash,
+	//     	menu = target;
+	//     	var target = $(this.hash);
+	//     	$('html, body').stop().animate({
+	//     		scrollTop: (target.offset().top) + 1
+	//     	}, 500, 'swing', function () {
+	//     		window.location.hash = target;
+	//     		$(document).on("scroll", onScroll);
+	//     	});
+	//     });
+	// });
 
 	function onScroll(event){
 		var scrollPos = $(document).scrollTop();
@@ -110,30 +112,57 @@ seven=['animals', 'because', 'chapter', 'another', 'believe', 'English', 'flower
 
 })(window.jQuery);
 
-const recorder = new MicRecorder({bitRate: 128});
 
-function startRecording() {
-	recorder.start().catch((e) => {
-		console.error(e);
-	});
-}
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+   console.log('getUserMedia supported.');
+   navigator.mediaDevices.getUserMedia (
+      // constraints - only audio needed for this app
+      {
+         audio: true
+      })
 
-function stopRecording() {
-	document.getElementById('caption-div').style.width = 'fit-content';
-	
-	recorder.stop().getMp3().then(([buffer, blob]) => {
-		const file = new File(buffer, 'me-at-thevoice.mp3', {
-			type: blob.type,
-			lastModified: Date.now()
-		});
+      // Success callback
+      .then(function(stream) {
+      	const mediaRecorder = new MediaRecorder(stream);
+      	record.onclick = function(){
+      		mediaRecorder.start();
+			console.log(mediaRecorder.state);
+			mediaRecorder.ondataavailable = function(e){
+			chunks.push(e.data);
+			}
 
-		const player = new Audio(URL.createObjectURL(file));
-  		player.play();
-	});	
+      	}
+      	stop.onclick = function(){
+      		document.getElementById('caption-div').style.width = 'fit-content';
+			mediaRecorder.stop();
+      	}
+
+      	mediaRecorder.onstop = function(){
+      		const audio = document.createElement('audio');
+      		const clipContainer = document.createElement('li');
+      		const blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus'});
+      		let recordings = document.getElementById("recordings");
+			chunks =[];
+			const audioUrl = window.URL.createObjectURL(blob);
+			console.log(audioUrl);
+			audio.setAttribute('controls', '');
+      		clipContainer.appendChild(audio);
+      		audio.src = audioUrl;
+      		clipContainer.classList.add('clip');
+      		recordings.appendChild(clipContainer);
+      	}
+      })
+
+      // Error callback
+      .catch(function(err) {
+         console.log('The following getUserMedia error occurred: ' + err);
+      }
+   );
+} else {
+   console.log('getUserMedia not supported on your browser!');
 }
 
 function reading(){
-	startRecording();
 	document.getElementById('caption-div').style.width = '100%';
 	var sen_box = document.getElementById('sentance-box');
 	sen_box.innerHTML = ""
@@ -151,6 +180,8 @@ function reading(){
 	}
 
 }
+
+const audioContext = window.AudioContext || window.webkitAudioContext;
 
 function getLocalStream() {
 	navigator.mediaDevices.getUserMedia({video: false, audio: true}).then( stream => {

@@ -69,8 +69,12 @@
                 <h6>Teach yourself proper Speach <br> Learn with AssemblyAI </h6>
                 <h2 style="color: white;" id="sentance-box">(Press Start And Begin Reading)</h2>
                 <div class="main-button scroll-to-section">
-                    <a onclick="reading()" href="#">Begin Reading</a>
-                    <button onclick="stopRecording()">stop</button>
+                    <button class="start" href="#">Begin Reading</button>
+                    <button class="end">stop</button>
+                </div>
+                <br>
+                <div id="recordings">
+
                 </div>
             </div>
         </div>
@@ -188,6 +192,7 @@
     
     <script type="text/javascript" src="https://unpkg.com/mic-recorder-to-mp3"></script>
 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="assets/js/custom.js"></script>
     
   </body>
