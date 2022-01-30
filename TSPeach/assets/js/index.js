@@ -32,13 +32,16 @@ const run = async () => {
       recorder.stopRecording();
       recorder = null;
     }
-  } else {
-    sen_box.innerHTML = "";
-    caption_div.style.width = 'fit-content';
-    messageEl.innerText="Feedback Will Appear Here";
-    buttonEl.innerText="Waiting for Assembly AI";
-    const response = await fetch('http://localhost:8000'); // get temp session token from server.js (backend)
-    const data = await response.json();
+
+    } else {
+
+      sen_box.innerHTML = "";
+      caption_div.style.width = 'fit-content';
+      messageEl.innerText="Feedback Will Appear Here";
+      buttonEl.innerText="Waiting for Assembly AI";
+
+      const response = await fetch('http://localhost:8000'); // get temp session token from server.js (backend)
+      const data = await response.json();
 
     if(data.error){
       alert(data.error)
@@ -51,19 +54,23 @@ const run = async () => {
 
     // handle incoming messages to display transcription to the DOM
     const texts = {};
+
     socket.onmessage = (message) => {
+      //formatting output text location for assemblyAi connection
       let msg = '';
       const res = JSON.parse(message.data);
       texts[res.audio_start] = res.text;
       const keys = Object.keys(texts);
       keys.sort((a, b) => a - b);
       console.log(keys);
+
       for (const key of keys) {
         if (texts[key]) {
           msg += ` ${texts[key]}`;
         }
       }
 
+      //Deciding if the word was pronounced correctly
       if(msg){
         let final="";
         msg = msg.match(/[^_\W]+/g).join(' ');
