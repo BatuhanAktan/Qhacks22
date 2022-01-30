@@ -30,7 +30,7 @@ We used assemblyai to get real time transcript of the user input and mark the wo
 
 ### Results
 
-The user input is read and if the pronounication is detected to be wrong the algorithm marks these words for the user to study them in the future and perform better in the future 
+The user input is read and if the pronounication is detected to be wrong the algorithm marks these words for the user to study them in the future and perform better in the future.
 (https://github.com/BatuhanAktan/Qhacks22/test.png?raw=true)
 
 ### Conclusion
