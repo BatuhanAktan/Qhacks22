@@ -1,0 +1,6 @@
+gTTS
+assemblyai
+os
+soundfile
+wave
+
