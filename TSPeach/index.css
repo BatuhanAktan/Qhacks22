@@ -1,0 +1,28 @@
+body{
+    margin: 0;
+}
+
+.menu {
+    background: #c785ec;
+    height: 6vh;
+}
+
+.menu a {
+    padding-left:2vh;
+    padding-top: 50%;
+    text-decoration: none;
+    color: white;
+}
+
+.language{
+    text-align: right;
+
+}
+.paragraph-container{
+    height: 94vh;
+    background: beige;
+    text-align: center;
+}
+
+
+
